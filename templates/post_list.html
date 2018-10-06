@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" background="https://content.newsbound.com/public/microsoft/microsoft_iot/images/background.c321e3367.jpg">
+<div class="row">
+<div class='col-md-8'>
+{% if obj_list %}
+{% for obj in obj_list %}
+<!-- <div class="row">	 -->
+  <!-- <div class="col-sm-8"> -->
+    <div class="thumbnail">
+      <!-- <img src="..." alt="..."> -->
+      <div class="caption">
+        {% if obj.draft %}
+          <h3>Staff only : Draft </h3>
+        {% endif %} 
+        {% if obj.publish > today %} 
+          <h3> Staff only :Future Post </h3> 
+        {% endif %}
+        <button style="float: right;" class="btn btn-danger" type="button">
+         Visits  <span class="badge">{{ obj.visits }}</span>
+      </button>
+        <h3><a href='{{ obj.get_absolute_url }}'>{{obj.title}}</a></h3>
+
+        <p style="color: #555555">
+          {% if obj.publish %}
+          <span class="glyphicon glyphicon-calendar" aria-hidden="true""></span>{{ obj.publish }}&emsp;
+          {% endif %}
+          {% if obj.user.get_full_name %}
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> : {{ obj.user.get_full_name }}&emsp;          
+          {% endif %}
+          {% if obj.category %}
+            <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> : {{ obj.category }}
+          {% endif %}
+        </p>
+        <hr/>
+        <p>{{obj.content | safe | linebreaks | truncatechars:200 }}</p>
+        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">Read more</a></p>
+      </div>
+    </div>
+ <br/>
+{% endfor %}
+{% else %}
+    <div class="alert alert-danger" role="alert">
+     <h3> <strong>Oops!</strong>,no results found. </h3>
+    </div>
+{% endif %}
+</div>
+<div class="col-md-3 ">
+<div class="row cate">
+<h3 class="text-center"><span class="label label-primary" style="background-color: #3074ae;">Categories</span></h3><br>
+<ul>
+{% for key,category in categories.items %}
+  <!-- <li><a onclick="typeinsearch('{{category}}')">{{ category }}</li> -->
+  <li><button class="btn btn-link" onclick="typeinsearch('{{key}}')">{{ key }}({{ category }})</button></li>
+{% endfor %}
+</ul>
+</div>
+<br>
+<div class="row text-center cate">
+<h3 class="text-center"><span class="label label-primary" style="background-color: #3074ae;">Amazon Best Picks</span></h3><br>
+
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=hrsh07-21&marketplace=amazon&region=IN&placement=B01N1X40DR&asins=B01N1X40DR&linkId=2bded310a61a4922a8d9a8c3f75f920f&show_border=true&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
+    </iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=hrsh07-21&marketplace=amazon&region=IN&placement=B00B7GV802&asins=B00B7GV802&linkId=75caa7a889803a982cb2be2f634f7197&show_border=true&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
+    </iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=hrsh07-21&marketplace=amazon&region=IN&placement=0981467350&asins=0981467350&linkId=c46b197fee9a89212a05008f4375b4fc&show_border=true&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
+</iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=IN&source=ac&ref=tf_til&ad_type=product_link&tracking_id=hrsh07-21&marketplace=amazon&region=IN&placement=0984782869&asins=0984782869&linkId=0fe96cf883402d26041d93636f242c76&show_border=true&link_opens_in_new_window=false&price_color=333333&title_color=0066c0&bg_color=ffffff">
+    </iframe>
+</div>
+<!-- <div class="row text-center cate">
+<h3 class="text-center"><span class="label label-primary" style="background-color: #3074ae;">Increase your algorithmic skills</span></h3><br>
+<SCRIPT charset="utf-8" type="text/javascript" src="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fhrsh07-21%2F8003%2F460d5ba9-e562-44c3-a793-802892f4d1a2&Operation=GetScriptTemplate"> </SCRIPT> <NOSCRIPT><A rel="nofollow" HREF="http://ws-in.amazon-adsystem.com/widgets/q?rt=tf_ssw&ServiceVersion=20070822&MarketPlace=IN&ID=V20070822%2FIN%2Fhrsh07-21%2F8003%2F460d5ba9-e562-44c3-a793-802892f4d1a2&Operation=NoScript">Amazon.in Widgets</A></NOSCRIPT>
+</div> -->
+</div>  
+</div>
+</div>
+<footer>
+<div class="container">
+<div class="col-md-10 col-md-offset-1" style="margin-bottom: 20px">
+   <nav aria-label="...">
+      <ul class="pager">
+        {% if obj_list.has_previous %}
+          <li class="previous"><a href="?{{ page_request_var }}={{ obj_list.previous_page_number }}{% if request.GET.q %} &q={{ request.GET.q }} {% endif %}">Newer</a></li>
+        {% endif %}
+        <span>Page {{ obj_list.number }} of {{ obj_list.paginator.num_pages }}</span>
+        {% if obj_list.has_next %}
+          <li class="next"><a href="?{{ page_request_var }}={{ obj_list.next_page_number }}{% if request.GET.q %} &q={{ request.GET.q }} {% endif %}">Older</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</div>
+</div>
+</footer>
+{% endblock content %}
