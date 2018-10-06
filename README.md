@@ -18,3 +18,7 @@ Before running the app make sure you complete the following steps :-<br>
 * Create a <strong>SENDGRID API</strong>.
 * Copy the contents of <strong>settings/base.py</strong> and make a new file <strong>settings/local.py</strong>.
 * Replace SENDGRID_API_KEY variable value with your created API.
+
+## Credits
+
+This repo was downloaded from <a href="https://github.com/hrsvrdhn/blog_django" target="_blank">HarshVardhan's Github</a> 
