@@ -2,7 +2,11 @@
 
 trydjango19/settings/local.py
 
-db.sqlite3
+# Text backup files
+*.bak
+
+# Database
+*.sqlite3
 
 .DS_Store
 bin/
